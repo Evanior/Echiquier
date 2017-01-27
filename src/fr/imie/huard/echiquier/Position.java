@@ -1,9 +1,11 @@
 package fr.imie.huard.echiquier;
 
+import java.io.Serializable;
+
 /**
  * Created by huard.cdi04 on 27/01/2017.
  */
-public class Position {
+public class Position implements Serializable{
     private int x;
     private int y;
 
