@@ -4,6 +4,7 @@ import fr.imie.huard.piece.CollectionPieces;
 import fr.imie.huard.piece.Piece;
 
 import java.io.*;
+import java.util.stream.Stream;
 
 /**
  * Created by huard.cdi04 on 27/01/2017.
@@ -49,7 +50,14 @@ public class Echiquier {
     }
 
     public int getPoints(char couleur){
-        return 0;
+        int val = 0;
+        Stream<Piece> p = maCollection.stream().filter(x -> x.getCouleur() == couleur)
+                .distinct();
+        Piece tab[] = (Piece[])p.toArray();
+        for (Piece piece: tab) {
+            val += piece.getValeur();
+        }
+        return val;
     }
 
     public void afficher(){
