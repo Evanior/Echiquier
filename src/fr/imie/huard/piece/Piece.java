@@ -2,10 +2,12 @@ package fr.imie.huard.piece;
 
 import fr.imie.huard.echiquier.Position;
 
+import java.io.Serializable;
+
 /**
  * Created by huard.cdi04 on 27/01/2017.
  */
-public abstract class Piece {
+public abstract class Piece implements Serializable {
     private char couleur;
     private Position position;
 
