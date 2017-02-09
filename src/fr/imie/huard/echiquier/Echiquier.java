@@ -41,11 +41,6 @@ public class Echiquier {
                     public byte getValeur() {
                         return 0;
                     }
-
-                    @Override
-                    public void deplacement(Position p) {
-
-                    }
                 });
     }
 

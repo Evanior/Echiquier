@@ -1,5 +1,6 @@
 package fr.imie.huard.piece;
 
+import fr.imie.huard.echiquier.Echiquier;
 import fr.imie.huard.echiquier.Position;
 
 /**
@@ -13,6 +14,9 @@ public class Roi extends Piece{
 
     @Override
     public boolean positionPossible(Position p) {
+        if(Echiquier.getInstance().getPiece(p).getValeur() == 0){
+            return false;
+        }
         return true;
     }
 
@@ -24,11 +28,5 @@ public class Roi extends Piece{
     @Override
     public byte getValeur() {
         return 20;
-    }
-
-    @Override
-    public void deplacement(Position p) {
-        if(positionPossible(p))
-            setPosition(p);
     }
 }

@@ -1,6 +1,7 @@
 package fr.imie.huard.piece;
 
 import fr.imie.huard.echiquier.Position;
+import fr.imie.huard.exception.ExceptionPosition;
 
 import java.io.Serializable;
 
@@ -40,7 +41,13 @@ public abstract class Piece implements Serializable {
 
     public abstract byte getValeur();
 
-    public abstract void deplacement(Position p);
+    public void deplacement(Position p) throws ExceptionPosition{
+        if(!positionPossible(p)) {
+            throw new ExceptionPosition("Déplacement non autoriser");
+        }else {
+            setPosition(p);
+        }
+    }
 
     @Override
     public String toString() {
