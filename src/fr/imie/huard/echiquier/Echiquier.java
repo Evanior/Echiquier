@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 public class Echiquier extends JFrame {
     private static Echiquier ourInstance = new Echiquier();
     private CollectionPieces maCollection = new CollectionPieces();
-    GridLayout plateau;
 
     public static Echiquier getInstance() {
         return ourInstance;
@@ -25,7 +24,7 @@ public class Echiquier extends JFrame {
         this.setSize(new DimensionUIResource(500,500));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        plateau = new GridLayout(8,8);
+        GridLayout plateau = new GridLayout(8,8);
         this.setLayout(plateau);
 
         this.setVisible(true);
