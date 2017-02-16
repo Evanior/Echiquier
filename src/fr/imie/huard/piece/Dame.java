@@ -8,7 +8,7 @@ import fr.imie.huard.echiquier.Position;
  */
 public class Dame extends Piece {
     public Dame(char couleur, Position position) {
-        super(couleur, position);
+        super(couleur, position,'D');
     }
 
     @Override

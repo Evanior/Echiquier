@@ -3,21 +3,32 @@ package fr.imie.huard.echiquier;
 import fr.imie.huard.piece.CollectionPieces;
 import fr.imie.huard.piece.Piece;
 
+import javax.swing.*;
+import javax.swing.plaf.DimensionUIResource;
+import java.awt.*;
 import java.io.*;
 import java.util.stream.Stream;
 
 /**
  * Created by huard.cdi04 on 27/01/2017.
  */
-public class Echiquier {
+public class Echiquier extends JFrame {
     private static Echiquier ourInstance = new Echiquier();
     private CollectionPieces maCollection = new CollectionPieces();
+    GridLayout plateau;
 
     public static Echiquier getInstance() {
         return ourInstance;
     }
 
     private Echiquier() {
+        this.setSize(new DimensionUIResource(500,500));
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        plateau = new GridLayout(8,8);
+        this.setLayout(plateau);
+
+        this.setVisible(true);
     }
 
     public CollectionPieces getMaCollection() {
@@ -31,7 +42,7 @@ public class Echiquier {
     public Piece getPiece(Position position){
         return maCollection.stream().filter(x -> x.getPosition().memePosition(position))
                 .findAny()
-                .orElse(new Piece('o', new Position(0,0)) {
+                .orElse(new Piece('o', new Position(0,0),' ') {
                     @Override
                     public boolean positionPossible(Position p) {
                         return false;
@@ -58,26 +69,40 @@ public class Echiquier {
     public void afficher(){
         System.out.println("  | A | B | C | D | E | F | G | H |");
         System.out.println("  ---------------------------------");
-        Position[] plateau = new Position[64];
+        Position[] tabPlateau = new Position[64];
         int index = 0;
         for (int i = 1; i <= 8; i++){
             for (int j = 1; j <= 8; j++){
-                plateau[index] = new Position(i,j);
+                tabPlateau[index] = new Position(i,j);
+                Case c = new Case(getPiece(tabPlateau[index]));
+                if(index % 2 == 0){
+                    c.setBackground(Color.BLACK);
+                    if(i % 2 == 0) {
+                        c.setBackground(Color.WHITE);
+                    }
+                }else {
+                    c.setBackground(Color.WHITE);
+                    if(i % 2 == 0) {
+                        c.setBackground(Color.BLACK);
+                    }
+                }
+                this.getContentPane().add(c);
                 switch (j){
                     case 1 :
-                        System.out.print(i+" | "+getPiece(plateau[index]).getSymbole()+" | ");
+                        System.out.print(i+" | "+getPiece(tabPlateau[index]).getSymbole()+" | ");
                         break;
                     case 8 :
-                        System.out.println(getPiece(plateau[index]).getSymbole()+" | ");
+                        System.out.println(getPiece(tabPlateau[index]).getSymbole()+" | ");
                         break;
                     default:
-                        System.out.print(getPiece(plateau[index]).getSymbole()+" | ");
+                        System.out.print(getPiece(tabPlateau[index]).getSymbole()+" | ");
                         break;
                 }
                 index++;
             }
             System.out.println("  ---------------------------------");
         }
+        this.setVisible(true);
     }
 
     public void sauvgarde(){

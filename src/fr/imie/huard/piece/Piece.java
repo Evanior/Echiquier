@@ -3,6 +3,7 @@ package fr.imie.huard.piece;
 import fr.imie.huard.echiquier.Position;
 import fr.imie.huard.exception.ExceptionPosition;
 
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -11,18 +12,16 @@ import java.io.Serializable;
 public abstract class Piece implements Serializable {
     private char couleur;
     private Position position;
+    private char symbole;
 
-    public Piece(char couleur, Position position) {
+    public Piece(char couleur, Position position, char symbole) {
         this.couleur = couleur;
         this.position = position;
+        this.symbole = symbole;
     }
 
     public char getCouleur() {
         return couleur;
-    }
-
-    public void setCouleur(char couleur) {
-        this.couleur = couleur;
     }
 
     public Position getPosition() {
@@ -36,7 +35,7 @@ public abstract class Piece implements Serializable {
     public abstract boolean positionPossible(Position p);
 
     public char getSymbole(){
-        return ' ';
+        return this.symbole;
     }
 
     public abstract byte getValeur();

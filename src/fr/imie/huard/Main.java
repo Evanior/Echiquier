@@ -51,6 +51,7 @@ public class Main {
         monEchiquier.ajouterPiece(pionNoireF);
         monEchiquier.ajouterPiece(pionNoireG);
         monEchiquier.ajouterPiece(pionNoireH);
+        //pionBlancA.setPosition(new Position(pionBlancA.getPosition().getX()+1,pionBlancA.getPosition().getY()));
         monEchiquier.afficher();
     }
 }

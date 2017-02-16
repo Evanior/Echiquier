@@ -9,7 +9,7 @@ import fr.imie.huard.echiquier.Position;
 public class Roi extends Piece{
 
     public Roi(char couleur, Position position) {
-        super(couleur, position);
+        super(couleur, position,'R');
     }
 
     @Override
