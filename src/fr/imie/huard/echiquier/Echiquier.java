@@ -56,6 +56,12 @@ public class Echiquier extends JFrame {
                 });
     }
 
+    public Piece getPiece(Case c){
+        return maCollection.stream().filter(x -> x.getPosition().memePosition(c.getPosition()))
+                .findAny()
+                .orElse(c.getPiece());
+    }
+
     public int getPoints(char couleur){
         int val = 0;
         Stream<Piece> p = maCollection.stream().filter(x -> x.getCouleur() == couleur)
@@ -75,7 +81,11 @@ public class Echiquier extends JFrame {
         for (int i = 1; i <= 8; i++){
             for (int j = 1; j <= 8; j++){
                 tabPlateau[index] = new Position(i,j);
-                plateau[index] = new Case(getPiece(tabPlateau[index]));
+                if(getPiece(tabPlateau[index]).getCouleur() == 'o'){
+                    plateau[index] = new Case(tabPlateau[index]);
+                }else {
+                    plateau[index] = new Case(getPiece(tabPlateau[index]));
+                }
                 if(index % 2 == 0){
                     plateau[index].setBackground(Color.BLACK);
                     if(i % 2 == 0) {
