@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 public class Echiquier extends JFrame {
     private static Echiquier ourInstance = new Echiquier();
     private CollectionPieces maCollection = new CollectionPieces();
+    private Case[] plateau = new Case[64];
+    private OnClickCaseListener listener = new OnClickCaseListener();
 
     public static Echiquier getInstance() {
         return ourInstance;
@@ -73,19 +75,20 @@ public class Echiquier extends JFrame {
         for (int i = 1; i <= 8; i++){
             for (int j = 1; j <= 8; j++){
                 tabPlateau[index] = new Position(i,j);
-                Case c = new Case(getPiece(tabPlateau[index]));
+                plateau[index] = new Case(getPiece(tabPlateau[index]));
                 if(index % 2 == 0){
-                    c.setBackground(Color.BLACK);
+                    plateau[index].setBackground(Color.BLACK);
                     if(i % 2 == 0) {
-                        c.setBackground(Color.WHITE);
+                        plateau[index].setBackground(Color.WHITE);
                     }
                 }else {
-                    c.setBackground(Color.WHITE);
+                    plateau[index].setBackground(Color.WHITE);
                     if(i % 2 == 0) {
-                        c.setBackground(Color.BLACK);
+                        plateau[index].setBackground(Color.BLACK);
                     }
                 }
-                this.getContentPane().add(c);
+                plateau[index].addActionListener(listener);
+                this.getContentPane().add(plateau[index]);
                 switch (j){
                     case 1 :
                         System.out.print(i+" | "+getPiece(tabPlateau[index]).getSymbole()+" | ");
